@@ -31,7 +31,15 @@ function nextStage() {
   const app = document.getElementById("app");
   const stage = stages[current];
 
-  let html = `<h2>${stage.title}</h2><p>${stage.question}</p>`;
+  let html = "";
+
+  // Картинка вверху, если есть
+  if (stage.image) {
+    html += `<img src="${stage.image}" alt="stage image" class="stage-image">`;
+  }
+
+  html += `<h2>${stage.title}</h2><p>${stage.question}</p>`;
+
   stage.options.forEach(opt => {
     html += `<button onclick="nextStage()">${opt}</button><br>`;
   });
@@ -42,7 +50,7 @@ function nextStage() {
 
   app.innerHTML = html;
   current++;
-
 }
+
 
 
