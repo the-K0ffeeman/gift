@@ -22,11 +22,17 @@ button {
   cursor: pointer;
 }
 
-img {
+.stage-image {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   margin: 20px auto;
   display: block;
+  opacity: 0;
+  transition: opacity 0.8s ease-in;
+}
+
+.stage-image.loaded {
+  opacity: 1;
 }
