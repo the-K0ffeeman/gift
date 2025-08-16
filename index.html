@@ -7,6 +7,7 @@
 </head>
 <body>
   <div id="app">
+    <!-- Первый экран с картинкой -->
     <img src="papa1.jpg" alt="Папа" class="stage-image loaded">
     <h1>Добро пожаловать в систему “Папа 5.0”</h1>
     <p>Версия: Юбилейная (50 лет стабильной работы)</p>
@@ -47,28 +48,41 @@
       const app = document.getElementById("app");
       const stage = stages[current];
 
-      let html = "";
+      // Очищаем всё
+      app.innerHTML = "";
 
-      if (stage.image) {
-        html += `<img src="${stage.image}" alt="stage image" class="stage-image">`;
-      }
+      // Картинка
+      const img = document.createElement("img");
+      img.src = stage.image;
+      img.alt = "stage image";
+      img.className = "stage-image";
+      img.onload = () => img.classList.add("loaded");
+      app.appendChild(img);
 
-      html += `<h2>${stage.title}</h2><p>${stage.question}</p>`;
+      // Заголовок и вопрос
+      const title = document.createElement("h2");
+      title.textContent = stage.title;
+      app.appendChild(title);
 
+      const question = document.createElement("p");
+      question.textContent = stage.question;
+      app.appendChild(question);
+
+      // Кнопки
       stage.options.forEach(opt => {
-        html += `<button onclick="nextStage()">${opt}</button><br>`;
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.onclick = nextStage;
+        app.appendChild(btn);
+        app.appendChild(document.createElement("br"));
       });
 
+      // Финальное сообщение
       if (stage.options.length === 0) {
-        html += `<h3>С юбилеем! Мы тебя любим ❤️</h3>`;
+        const final = document.createElement("h3");
+        final.textContent = "С юбилеем! Мы тебя любим ❤️";
+        app.appendChild(final);
       }
-
-      app.innerHTML = html;
-
-      setTimeout(() => {
-        const img = document.querySelector(".stage-image");
-        if (img) img.classList.add("loaded");
-      }, 50);
 
       current++;
     }
