@@ -7,35 +7,37 @@
 </head>
 <body>
   <div id="app">
+    <img src="papa1.jpg" alt="Папа" class="stage-image loaded">
     <h1>Добро пожаловать в систему “Папа 5.0”</h1>
     <p>Версия: Юбилейная (50 лет стабильной работы)</p>
     <button onclick="nextStage()">Продолжить</button>
   </div>
+
   <script>
     const stages = [
       {
         title: "Этап 1: Семейная память",
         question: "В каком году ты стал папой?",
         options: ["2004", "2010", "Я всегда был папой, просто не всегда знал об этом"],
-        image: "papa1.jpg"
+        image: "papa2.jpg",
       },
       {
         title: "Этап 2: Умения и навыки",
         question: "Что ты умеешь лучше всего?",
         options: ["Чинить всё, что не сломано", "Готовить шашлык при любой погоде", "Давать советы, которые вспоминаешь через 5 лет"],
-        image: "papa2.jpg"
+        image: "papa3.jpg",
       },
       {
         title: "Этап 3: Папин девиз",
         question: "Выбери свой девиз:",
         options: ["Надо решать проблемы по мере их поступления", "Дело-то житейское", "От работы дохнут кони, ну а я − бессмертный пони"],
-        image: "papa3.jpg"
+        image: "papa4.jpg",
       },
       {
         title: "🎉 Диагностика завершена",
         question: "Папа 5.0 — уникальный экземпляр. Пробег: 50 лет. Состояние: Отличное. Поддержка: Безграничная.",
         options: [],
-        image: "final.jpg"
+        image: "papa5.jpg",
       }
     ];
 
@@ -45,7 +47,14 @@
       const app = document.getElementById("app");
       const stage = stages[current];
 
-      let html = `<h2>${stage.title}</h2><p>${stage.question}</p>`;
+      let html = "";
+
+      if (stage.image) {
+        html += `<img src="${stage.image}" alt="stage image" class="stage-image">`;
+      }
+
+      html += `<h2>${stage.title}</h2><p>${stage.question}</p>`;
+
       stage.options.forEach(opt => {
         html += `<button onclick="nextStage()">${opt}</button><br>`;
       });
@@ -56,14 +65,10 @@
 
       app.innerHTML = html;
 
-      if (stage.image) {
-        const img = document.createElement("img");
-        img.src = stage.image;
-        img.alt = "stage image";
-        img.classList.add("stage-image");
-        img.onload = () => img.classList.add("loaded");
-        app.appendChild(img);
-      }
+      setTimeout(() => {
+        const img = document.querySelector(".stage-image");
+        if (img) img.classList.add("loaded");
+      }, 50);
 
       current++;
     }
