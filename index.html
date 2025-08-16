@@ -28,28 +28,22 @@
       cursor: pointer;
     }
 
-    img {
+    .stage-image {
       max-width: 100%;
       height: auto;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       margin: 20px auto;
       display: block;
-      opacity: 0;
-      transition: opacity 0.8s ease-in;
-    }
-
-    img.loaded {
-      opacity: 1;
     }
   </style>
 </head>
 <body>
   <div id="app">
-    <img src="papa1.jpg" alt="Папа" onload="this.classList.add('loaded')">
+    <img src="papa1.jpg" alt="Папа" class="stage-image">
     <h1>Добро пожаловать в систему “Папа 5.0”</h1>
     <p>Версия: Юбилейная (50 лет стабильной работы)</p>
-    <button onclick="startDiagnosis()">Продолжить</button>
+    <button onclick="nextStage()">Продолжить</button>
   </div>
 
   <script>
@@ -82,16 +76,12 @@
 
     let current = 0;
 
-    function startDiagnosis() {
-      nextStage();
-    }
-
     function nextStage() {
       const stage = stages[current];
       const app = document.getElementById("app");
 
       let html = `
-        <img src="${stage.image}" alt="stage image" onload="this.classList.add('loaded')">
+        <img src="${stage.image}" alt="stage image" class="stage-image">
         <h2>${stage.title}</h2>
         <p>${stage.question}</p>
       `;
