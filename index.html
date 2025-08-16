@@ -28,7 +28,7 @@
       cursor: pointer;
     }
 
-    .stage-image {
+    img {
       max-width: 100%;
       height: auto;
       border-radius: 8px;
@@ -39,7 +39,7 @@
       transition: opacity 0.8s ease-in;
     }
 
-    .stage-image.loaded {
+    img.loaded {
       opacity: 1;
     }
   </style>
@@ -84,16 +84,14 @@
     let current = 0;
 
     function nextStage() {
-      const app = document.getElementById("app");
       const stage = stages[current];
+      const app = document.getElementById("app");
 
-      let html = "";
-
-      if (stage.image) {
-        html += `<img src="${stage.image}" alt="stage image" class="stage-image">`;
-      }
-
-      html += `<h2>${stage.title}</h2><p>${stage.question}</p>`;
+      let html = `
+        <img src="${stage.image}" alt="stage image" onload="this.classList.add('loaded')">
+        <h2>${stage.title}</h2>
+        <p>${stage.question}</p>
+      `;
 
       stage.options.forEach(opt => {
         html += `<button onclick="nextStage()">${opt}</button><br>`;
@@ -104,12 +102,6 @@
       }
 
       app.innerHTML = html;
-
-      setTimeout(() => {
-        const img = document.querySelector(".stage-image");
-        if (img) img.classList.add("loaded");
-      }, 50);
-
       current++;
     }
 
