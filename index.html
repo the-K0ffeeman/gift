@@ -45,16 +45,15 @@
   </style>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <img src="papa1.jpg" alt="Папа" onload="this.classList.add('loaded')">
+    <h1>Добро пожаловать в систему “Папа 5.0”</h1>
+    <p>Версия: Юбилейная (50 лет стабильной работы)</p>
+    <button onclick="startDiagnosis()">Продолжить</button>
+  </div>
 
   <script>
     const stages = [
-      {
-        title: "Добро пожаловать в систему “Папа 5.0”",
-        question: "Версия: Юбилейная (50 лет стабильной работы)",
-        options: ["Продолжить"],
-        image: "papa1.jpg",
-      },
       {
         title: "Этап 1: Семейная память",
         question: "В каком году ты стал папой?",
@@ -83,6 +82,10 @@
 
     let current = 0;
 
+    function startDiagnosis() {
+      nextStage();
+    }
+
     function nextStage() {
       const stage = stages[current];
       const app = document.getElementById("app");
@@ -104,9 +107,6 @@
       app.innerHTML = html;
       current++;
     }
-
-    // Показываем первый экран сразу
-    nextStage();
   </script>
 </body>
 </html>
